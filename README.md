@@ -8,7 +8,7 @@ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 sudo apt update
 
-# Create the dexi package
+# Create the dexi package (first time setup)
 
 ros2 pkg create dexi --dependencies rclcpp --build-type ament_cmake
 
@@ -19,15 +19,22 @@ ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 
 # Camera
 
+## Build
+
 cd /root/ros2_ws/src
 git clone https://github.com/Kapernikov/cv_camera
 cd /root/ros2_ws
 rosdep install --from-paths src -y --ignore-src
 colcon build
+
+## Run
+
 source install/setup.bash
 ros2 run cv_camera cv_camera_node
 
 # Web video server
+
+## Build
 
 cd /root/ros2_ws/src
 git clone https://github.com/RobotWebTools/web_video_server/
@@ -37,4 +44,35 @@ cd ~/ros2_ws
 rosdep install --from-paths src -y --ignore-src
 colcon build
 
-# LED support
+## Run
+
+source install/setup.bash
+ros2 run web_video_server web_video_server
+
+# Micro DDS Client
+
+## Build
+
+cd ~/ros2_ws/src
+git clone https://github.com/eProsima/Micro-XRCE-DDS-Agent.git
+cd ~/ros2_ws
+colcon build
+
+## Run
+
+source install/setup.bash
+MicroXRCEAgent serial --dev /dev/ttyAMA0 -b 921600
+
+# PX4 ROS Messages and ROS Com Example
+
+## Build
+
+cd ~/ros2_ws/src
+git clone https://github.com/PX4/px4_msgs
+git clone https://github.com/PX4/px4_ros_com
+cd ~/ros2_ws
+colcon build
+
+# LED
+
+# GPIO
