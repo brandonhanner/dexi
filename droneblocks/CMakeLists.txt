@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(dexi_msgs)
+project(droneblocks)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -25,7 +25,6 @@ find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "srv/SetLedEffect.srv"
   "srv/Load.srv"
   "srv/Run.srv"
   "srv/Store.srv"
