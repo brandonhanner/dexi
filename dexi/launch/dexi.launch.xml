@@ -1,0 +1,7 @@
+<launch>
+    <!-- rosbridge server -->
+    <include file="$(find-pkg-share rosbridge_server)/launch/rosbridge_websocket_launch.xml" />
+
+    <!-- DroneBlocks -->
+    <node pkg="droneblocks" exec="droneblocks" output="screen" />
+</launch>

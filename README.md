@@ -79,12 +79,23 @@ ros2 pkg create dexi --dependencies rclcpp --build-type ament_cmake
 
 ### New Container
 
-- docker run -it -v ${PWD}:/root/ros2_ws/src osrf/ros:humble-desktop
+Mapping port 9090 for rosbridge websocket:
+
+- docker run -it -p 9090:9090 -v ${PWD}:/root/ros2_ws/src osrf/ros:humble-desktop
 
 ### Existing Container
 
 - docker start 12b3e9d32467
 - docker exec -it 12b3e9d32467 /bin/bash
+
+# Calling DroneBlocks Services
+
+- ros2 service call /droneblocks/run dexi_msgs/srv/Run "{code: 'mission code goes in here'}"
+- ros2 service call /droneblocks/stop std_srvs/srv/Trigger
+- ros2 service call /droneblocks/load dexi_msgs/srv/Load
+# nginx for DroneBlocks
+
+- docker run -it --rm -d -p 7777:80 --name droneblocks -v ${PWD}/droneblocks/www:/usr/share/nginx/html nginx
 
 # Thanks
 
