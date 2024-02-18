@@ -23,7 +23,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'led_service = dexi_py.led:main'
+            'led_service = dexi_py.led:main',
+            'offboard_node = dexi_py.offboard:main',
+            'processes = dexi_py.processes:main'
         ],
     },
 )
