@@ -14,6 +14,9 @@
     <!-- Offboard w/ MicroXRCEAgent -->
     <include file="$(find-pkg-share dexi_py)/launch/offboard.launch.xml" />
 
+    <!-- Camera -->
+    <include file="$(find-pkg-share dexi)/launch/camera.launch.xml" />
+
     <!-- MAVROS w/ SITL -->
     <!-- <include file="$(find-pkg-share dexi)/launch/mavros_sitl.launch.xml" if="$(var sitl)" /> -->
     
