@@ -9,7 +9,7 @@
     <include file="$(find-pkg-share droneblocks)/launch/droneblocks.launch.xml" />
 
     <!-- LED -->
-    <include file="$(find-pkg-share dexi)/launch/led.launch.xml" if="$(var led)" />
+    <include file="$(find-pkg-share dexi_py)/launch/led.launch.yaml" if="$(var led)" />
 
     <!-- Offboard w/ MicroXRCEAgent -->
     <include file="$(find-pkg-share dexi_py)/launch/offboard.launch.xml" />
