@@ -16,6 +16,7 @@ Per the readme here: https://github.com/jgarff/rpi_ws281x
 ```
 sudo apt install python3-rpi.gpio
 sudo pip3 install adafruit-circuitpython-neopixel
+sudo pip3 install rpi_ws281x
 ```
 
 ## Command Line test
