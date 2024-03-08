@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2020 Copter Express Technologies
  *
- * Author: Oleg Kalachev <okalachev@gmail.com>
+ * Author: Oleg Kalachev <okalachev@gmail.com>, Dennis Baldwin <db@droneblocks.io>
  *
  * Distributed under MIT License (available at https://opensource.org/licenses/MIT).
  * The above copyright notice and this permission notice shall be included in all
@@ -630,6 +630,23 @@ Blockly.Blocks['set_duty_cycle'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setTooltip("Set PWM duty cycle on a GPIO pin (better to control LEDs, etc). Duty cycle is set in range of 0–1.");
+		this.setHelpUrl(DOCS_URL + '#GPIO');
+	}
+};
+
+Blockly.Blocks['set_pull_up_down'] = {
+	init: function () {
+		this.appendValueInput("PIN")
+			.setCheck("Number")
+			.appendField("set GPIO pin");
+		this.appendDummyInput()
+			.appendField("internal resistor to")
+			.appendField(new Blockly.FieldDropdown([["up", "pigpio.PUD_UP"], ["down", "pigpio.PUD_DOWN"], ["off", "pigpio.PUD_OFF"]]), "PULL");
+		this.setInputsInline(true);
+		this.setColour(COLOR_GPIO);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setTooltip("Set internal pull up resistor for this pin to up, down, or off.");
 		this.setHelpUrl(DOCS_URL + '#GPIO');
 	}
 };

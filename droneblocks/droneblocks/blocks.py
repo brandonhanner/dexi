@@ -109,47 +109,6 @@ class DroneBlocks(Node):
             response.success = True
             response.message = 'Error'
             return response
-            
-    def run_defunct(self, req):
-        if not self.running_lock.acquire(False):
-            return {'message': 'Already running'}
-
-        try:
-            self.get_logger().info('Run program')
-            self.running_pub.publish(Bool(True))
-
-            def program_thread():
-                self.stop = False
-                g = {'rclpy': rclpy,
-                    '_b': self.change_block,
-                    'print': self._print,
-                    'raw_input': self._input}
-                try:
-                    exec(req.code, g)
-                except Stop:
-                    self.get_logger().info('Program forced to stop')
-                except Exception as e:
-                    self.get_logger().error(str(e))
-                    traceback.print_exc()
-                    etype, value, tb = sys.exc_info()
-                    fmt = traceback.format_exception(etype, value, tb)
-                    fmt.pop(1) # remove 'clover_blocks' file frame
-                    exc_info = ''.join(fmt)
-                    self.error_pub.publish(str(e) + '\n\n' + exc_info)
-
-                self.get_logger().info('Program terminated')
-                self.running_lock.release()
-                self.running_pub.publish(False)
-                self.change_block('')
-
-            t = threading.Thread(target=program_thread)
-            t.start()
-
-            return {'success': True}
-
-        except Exception as e:
-            self.running_lock.release()
-            return {'message': str(e)}
 
     def stop(self, request, response):
         self.get_logger().info('Stop mission processing')
@@ -206,9 +165,8 @@ class DroneBlocks(Node):
         if self.stop_mission: raise Stop
 
     def _print(self, s):
-        self.get_logger().info(str(s))
         print_str = String()
-        print_str.data = s
+        print_str.data = str(s)
         self.print_pub.publish(print_str)
 
     def _input(self, s):
