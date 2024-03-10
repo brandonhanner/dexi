@@ -7,7 +7,7 @@ class LEDMockService(Node):
     def __init__(self):
         super().__init__('led_mock_service')
         self.srv = self.create_service(SetLED, 'set_led_mock', self.set_led_callback)
-
+        self.declare_parameter('led_count', rclpy.Parameter.Type.INTEGER)
 
     def set_led_callback(self, request, response):
         self.get_logger().info(str(request))

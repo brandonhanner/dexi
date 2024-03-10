@@ -10,7 +10,8 @@ class LEDService(Node):
         super().__init__('led_service')
         self.srv = self.create_service(SetLED, 'set_led', self.set_led_callback)
         self.pixel_pin = board.D10
-        self.num_pixels = 30
+        self.declare_parameter('led_count', rclpy.Parameter.Type.INTEGER)
+        self.num_pixels = self.get_parameter('led_count').value
         self.pixel_order = neopixel.GRB
         self.pixels = neopixel.NeoPixel(self.pixel_pin, self.num_pixels, brightness=0.2, auto_write=False, pixel_order=self.pixel_order)
 
