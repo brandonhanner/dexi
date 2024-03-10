@@ -60,7 +60,7 @@ class DroneBlocks(Node):
         self.is_mission_running = Bool() # False
         self.running_pub.publish(self.is_mission_running)
 
-        self.declare_parameter('missions_dir', '')
+        self.declare_parameter('missions_dir', rclpy.Parameter.Type.STRING)
         self.missions_dir = self.get_parameter('missions_dir').value
         self.name_regexp = re.compile(r'^[a-zA-Z-_.]{0,20}$')
 
