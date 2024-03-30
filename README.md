@@ -60,13 +60,6 @@ and make sure to comment out the following line:
 #camera_auto_detect=1
 ```
 
-# Micro DDS Client
-
-### Run
-
-- source install/setup.bash
-- MicroXRCEAgent serial --dev /dev/ttyAMA0 -b 921600
-
 # MAVROS and SITL
 
 Run the following from your host machine in the docker directory. It will spin up PX4-SITL and a ROS Humble container for DEXI development. You will need to make sure PX4 SITL is configured to send packets to the DEXI container IP
