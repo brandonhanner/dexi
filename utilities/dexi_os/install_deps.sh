@@ -95,11 +95,6 @@ cronjob="@reboot $croncmd"
 ( crontab -l | grep -v -F "$croncmd" ; echo "$cronjob" ) | crontab -
 #######################################################################################
 
-############################## setup wifi & hostapd stuff #############################
-# iw \
-# wireless-tools
-#######################################################################################
-
 ################################## install neofetch ###################################
 apt-get install -y neofetch
 echo 'neofetch' >> /home/dexi/.bashrc
@@ -107,8 +102,20 @@ echo 'neofetch' >> /home/dexi/.bashrc
 
 ################################### clone dexi repo ###################################
 git clone https://github.com/DroneBlocks/dexi.git /home/dexi/dexi
+# cd /home/dexi/dexi
+# git checkout develop
 #######################################################################################
 
 #################################### clone ark repo ###################################
 git clone https://github.com/ARK-Electronics/ark_companion_scripts.git /home/dexi/ark_companion_scripts
+#######################################################################################
+
+############################## setup wifi & hostapd stuff #############################
+apt install -y iw wireless-tools
+
+# testing.. will update next time i touch this...
+cd /tmp/resources/raspiApWlanScripts || exit 1
+chmod +x ./setup_wlan_and_AP_modes.sh
+./setup_wlan_and_AP_modes.sh -D -s SuperFi -p XXXXXXXX -a dexi-45df -r droneblocks
+
 #######################################################################################
