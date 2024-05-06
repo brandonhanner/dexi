@@ -116,6 +116,6 @@ apt install -y iw wireless-tools
 # testing.. will update next time i touch this...
 cd /tmp/resources/raspiApWlanScripts || exit 1
 chmod +x ./setup_wlan_and_AP_modes.sh
-./setup_wlan_and_AP_modes.sh -D -s SuperFi -p XXXXXXXX -a dexi-45df -r droneblocks
+./setup_wlan_and_AP_modes.sh -d -s SuperFi -p XXXXXXXX -a dexi-45df -r droneblocks
 
 #######################################################################################
