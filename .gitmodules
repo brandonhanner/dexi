@@ -12,3 +12,6 @@
 	path = web_video_server
 	url = https://github.com/RobotWebTools/web_video_server
 	branch = ros2
+[submodule "micro_ros_msgs"]
+	path = micro_ros_msgs
+	url = https://github.com/micro-ROS/micro_ros_msgs.git
